@@ -34,11 +34,10 @@ std::unique_ptr<DesktopCapturer> DesktopCapturer::CreateRawWindowCapturer(
 #endif  // defined(WEBRTC_USE_PIPEWIRE)
 
 #if defined(WEBRTC_USE_X11)
-  if (!DesktopCapturer::IsRunningUnderWayland())
-    return WindowCapturerX11::CreateRawWindowCapturer(options);
-#endif  // defined(WEBRTC_USE_X11)
-
+  return WindowCapturerX11::CreateRawWindowCapturer(options);
+#else
   return nullptr;
+#endif  // defined(WEBRTC_USE_X11)
 }
 
 }  // namespace webrtc
